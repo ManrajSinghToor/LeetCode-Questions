@@ -1,19 +1,17 @@
 class Solution {
     public int singleNumber(int[] nums) {
-        Map<Integer, Integer> map = new HashMap<>();
-        for(int i = 0; i < nums.length; i++){
-            if(map.containsKey(nums[i])){
-                map.put(nums[i], map.get(nums[i]) + 1);
+        int num = 0;
+        for(int i = 0; i < 32; i++){
+            int bitSum = 0;
+            for(int n : nums){
+                if(((1 << i) & n) != 0){
+                    bitSum += 1;
+                }
             }
-            else {
-                map.put(nums[i], 1);
-            }
-        }
-        for(int ele : map.keySet()){
-            if(map.get(ele) == 1){
-                return ele;
+            if(bitSum % 3 != 0){
+                num = num | (1 << i);
             }
         }
-        return -1;
+        return num;
     }
 }
