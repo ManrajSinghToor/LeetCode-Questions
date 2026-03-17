@@ -1,39 +1,45 @@
 class Solution {
-    public void merge(int[] a, int[] b, int[] arr){
-        int i = 0, j = 0, k = 0;
-        while(i < a.length && j < b.length){
-            if(a[i] <= b[j]) arr[k++] = a[i++];
-            else arr[k++] = b[j++];
-        }
-        while(i < a.length){
-            arr[k++] = a[i++];
-        }
-        while(j < b.length){
-            arr[k++] = b[j++];
-        }
-    }
-    public void mergeSort(int[] arr){
-        int n = arr.length;
-        if(n == 1) return;
+    public void merge(int[] arr, int low, int mid, int high) {
 
-        int mid = n / 2;
-        int[] a = new int[mid];
-        int[] b = new int[n - mid];
-
+        int[] temp = new int[high - low + 1];
+        int left = low;
+        int right = mid + 1;
         int k = 0;
-        for(int i = 0; i < a.length; i++){
-            a[i] = arr[k++];
+
+        while (left <= mid && right <= high) {
+            if (arr[left] <= arr[right]) {
+                temp[k++] = arr[left++];
+            } else {
+                temp[k++] = arr[right++];
+            }
         }
-        for(int i = 0; i < b.length; i++){
-            b[i] = arr[k++];
+
+        while (left <= mid) {
+            temp[k++] = arr[left++];
         }
 
-        mergeSort(a);
-        mergeSort(b);
+        while (right <= high) {
+            temp[k++] = arr[right++];
+        }
 
-        merge(a, b, arr);
-
+        // copy back
+        for (int i = 0; i < temp.length; i++) {
+            arr[low + i] = temp[i];
+        }
     }
+
+    public void mergeSort(int[] arr, int low, int high) {
+        if (low >= high)
+            return;
+
+        int mid = low + (high - low) / 2;
+
+        mergeSort(arr, low, mid);
+        mergeSort(arr, mid + 1, high);
+
+        merge(arr, low, mid, high);
+    }
+
     public int[] sortArray(int[] nums) {
         mergeSort(nums);
         return nums;
