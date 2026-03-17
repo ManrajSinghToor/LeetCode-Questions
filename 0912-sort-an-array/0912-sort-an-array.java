@@ -1,41 +1,32 @@
 class Solution {
-    public void merge(int[] a, int[] b, int[] arr){
-        int i = 0, j = 0, k = 0;
-        while(i < a.length && j < b.length){
-            if(a[i] <= b[j]) arr[k++] = a[i++];
-            else arr[k++] = b[j++];
+    public int partition(int[] arr, int low, int high){
+        int pivot = arr[high];
+        int i = low - 1;
+
+        for(int j = low; j < high; j++){
+            if(arr[j] < pivot){
+                i++;
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
         }
-        while(i < a.length){
-            arr[k++] = a[i++];
-        }
-        while(j < b.length){
-            arr[k++] = b[j++];
-        }
+        int temp = arr[i + 1];
+        arr[i + 1] = arr[high];
+        arr[high] = temp;
+
+        return i + 1;
     }
-    public void mergeSort(int[] arr){
-        int n = arr.length;
-        if(n == 1) return;
+    public void quickSort(int[] arr, int low, int high){
+        if(low < high){
+            int pivot = partition(arr, low, high);
 
-        // int mid = n / 2;
-        int[] a = new int[n/2];
-        int[] b = new int[n-n/2];
-
-        int k = 0;
-        for(int i = 0; i < a.length; i++){
-            a[i] = arr[k++];
+            quickSort(arr, low, pivot - 1);
+            quickSort(arr, pivot + 1, high);
         }
-        for(int i = 0; i < b.length; i++){
-            b[i] = arr[k++];
-        }
-
-        mergeSort(a);
-        mergeSort(b);
-
-        merge(a, b, arr);
-
     }
     public int[] sortArray(int[] nums) {
-        mergeSort(nums);
+        quickSort(nums, 0, nums.length - 1);
         return nums;
     }
 }
