@@ -8,6 +8,8 @@ class Solution {
 
         for(int i = idx; i < arr.length; i++){
             if(i > idx && arr[i] == arr[i - 1]) continue;
+            if(sum + arr[i] > target) break;
+            
             res.add(arr[i]);
             recurs(arr, ans, res, i + 1, sum + arr[i], target);
             res.remove(res.size() - 1);
