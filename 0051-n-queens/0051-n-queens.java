@@ -2,38 +2,46 @@ class Solution {
     public List<String> toString(char[][] chess){
         List<String> list = new ArrayList<>();
         for(int i = 0; i < chess.length; i++){
-            String value = new String(chess[i]);
-            list.add(value);
+            String ans = new String(chess[i]);
+            list.add(ans);
         }
         return list;
     }
-    public boolean isValid(char[][] chess, int row, int cols){
+    public boolean isValid(int row, int cols, char[][] chess){
         for(int i = 0; i < chess.length; i++){
             if(chess[row][i] == 'Q') return false;
         }
-        for(int i = 0; i < chess.length; i++){
-            if(chess[i][cols] == 'Q') return false;
+        for(int j = 0; j < chess.length; j++){
+            if(chess[j][cols] == 'Q') return false;
         }
-        for(int i = row - 1, j = cols - 1; i>= 0 && j >= 0; i--, j--){
+        int i = row - 1;
+        int j = cols - 1;
+        while(i >= 0 && j >= 0){
             if(chess[i][j] == 'Q') return false;
+            i--;
+            j--;
         }
-        for(int i = row - 1, j = cols + 1; i>= 0 && j < chess.length; i--, j++){
-            if(chess[i][j] == 'Q') return false;
+        int i1 = row - 1;
+        int j1 = cols + 1;
+        while(i1 >= 0 && j1 < chess.length){
+            if(chess[i1][j1] == 'Q') return false;
+            i1--;
+            j1++;
         }
-        return true;
+        return true; 
     }
-    public void nQueens(int n, int row, List<List<String>> ans, char[][] chess){
-        if(row == n){
+    public void backTrack(List<List<String>> ans, int row, char[][] chess){
+        if(row == chess.length){
             ans.add(toString(chess));
             return;
         }
-        for(int cols = 0; cols < n; cols++){
-            if(isValid(chess, row, cols)){
+        for(int cols = 0; cols < chess.length; cols++){
+            if(isValid(row, cols, chess)){
                 chess[row][cols] = 'Q';
-                nQueens(n, row + 1, ans, chess);
+                backTrack(ans, row + 1, chess);
                 chess[row][cols] = '.';
             }
-        }
+         }
     }
     public List<List<String>> solveNQueens(int n) {
         List<List<String>> ans = new ArrayList<>();
@@ -43,7 +51,7 @@ class Solution {
                 chess[i][j] = '.';
             }
         }
-        nQueens(n, 0, ans, chess);
+        backTrack(ans, 0, chess);
         return ans;
     }
 }
