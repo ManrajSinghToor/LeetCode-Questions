@@ -16,11 +16,7 @@ class Solution {
         while(j < nums2.length){
             ans[k++] = nums2[j++];
         }
-        double sum = 0;
         double median = 0;
-        for(int idx = 0; idx < ans.length; idx++){
-            sum += ans[idx];
-        }
         if(ans.length % 2 == 0) {
             return (ans[ans.length / 2] + ans[(ans.length / 2) - 1])/ 2.0;
         }
