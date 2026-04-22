@@ -1,3 +1,4 @@
+//THis is push efficient Approach push at O(1) whereas pop at O(n):-
 class MyQueue {
     Stack<Integer> st;
     Stack<Integer> st2;
@@ -23,7 +24,7 @@ class MyQueue {
     
     public int peek() {
         if(st.isEmpty()) return -1;
-        
+
         while(st.size() > 1) st2.push(st.pop());
         int top = st.peek();
         while(st2.size() > 0) st.push(st2.pop());
