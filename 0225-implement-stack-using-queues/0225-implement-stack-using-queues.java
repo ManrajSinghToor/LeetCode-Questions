@@ -1,30 +1,23 @@
-//This is Add Efficient approach in Queue:-
+//This is pop() effficient approach of Queues:-
 class MyStack {
     Queue<Integer> q;
     public MyStack() {
         q = new LinkedList<>();
     }
-    
     public void push(int x) {
         q.add(x);
-    }
-    
-    public int pop() {
         int n = q.size();
         for(int i = 0; i < n - 1; i++){
             q.add(q.remove());
         }
+    }
+    
+    public int pop() {
         return q.remove();
     }
     
     public int top() {
-        int n = q.size();
-        for(int i = 0; i < n - 1; i++){
-            q.add(q.remove());
-        }
-        int ans = q.peek();
-        q.add(q.remove());
-        return ans;
+        return q.peek();
     }
     
     public boolean empty() {
