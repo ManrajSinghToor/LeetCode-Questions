@@ -1,10 +1,8 @@
 //This is pop() efficient approach pop() - O(1) and push()- O(n);
 class MyQueue {
     Stack<Integer> st;
-    // Stack<Integer> st2;
     public MyQueue() {
         st = new Stack<>();
-        // st2 = new Stack<>();
     }
     public void insertAtBottom(Stack<Integer> st, int val){
         if(st.size() == 0) {
