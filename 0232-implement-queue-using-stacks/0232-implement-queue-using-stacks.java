@@ -1,34 +1,31 @@
-//THis is push efficient Approach push at O(1) whereas pop at O(n):-
+//This is pop() efficient approach pop() - O(1) and push()- O(n);
 class MyQueue {
     Stack<Integer> st;
-    Stack<Integer> st2;
+    // Stack<Integer> st2;
     public MyQueue() {
         st = new Stack<>();
-        st2 = new Stack<>();
+        // st2 = new Stack<>();
     }
-    
-    public void push(int x) {
-        st.push(x);
+    public void insertAtBottom(Stack<Integer> st, int val){
+        if(st.size() == 0) {
+            st.push(val); 
+            return;
+        }
+        int top = st.pop();
+        insertAtBottom(st, val);
+        st.push(top);
+    }
+    public void push(int x) {  
+        if(st.size() == 0) st.push(x);
+        else insertAtBottom(st, x);
     }
     
     public int pop() {
-        while(st.size() > 1) {
-            st2.push(st.pop());
-        }
-        int top = st.pop();
-        while(st2.size() > 0) {
-            st.push(st2.pop());
-        }
-        return top;
+        return st.pop();
     }
     
     public int peek() {
-        if(st.isEmpty()) return -1;
-
-        while(st.size() > 1) st2.push(st.pop());
-        int top = st.peek();
-        while(st2.size() > 0) st.push(st2.pop());
-        return top;
+        return st.peek();
     }
     
     public boolean empty() {
