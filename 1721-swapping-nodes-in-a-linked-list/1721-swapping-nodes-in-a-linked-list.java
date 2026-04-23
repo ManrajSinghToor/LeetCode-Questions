@@ -25,7 +25,7 @@ class Solution {
         for(int i = 1; i <= cnt - k; i++){
             last = last.next;
         }
-        if(begin == null || last == null) return head;
+        // if(begin == null || last == null) return head;
 
         int ans = begin.val;
         begin.val = last.val;
