@@ -26,9 +26,9 @@ class Solution {
             last = last.next;
         }
 
-        begin.val ^= last.val;
-        last.val ^= begin.val;
-        begin.val ^= last.val;
+        int ans = begin.val;
+        begin.val = last.val;
+        last.val = ans;
         return head;
     }
 }
