@@ -10,25 +10,19 @@
  */
 class Solution {
     public int[] nextLargerNodes(ListNode head) {
+        ArrayList<Integer> list = new ArrayList<>();
         ListNode temp = head;
-        int len = 0;
         while(temp != null){
-            len++;
+            list.add(temp.val);
             temp = temp.next;
         }
-        int[] arr = new int[len];
-        temp = head;
-        for(int i = 0; i < len; i++){
-            arr[i] = temp.val;
-            temp = temp.next;
-        }   
-        int[] ans = new int[len];
+        int[] ans = new int[list.size()];
         Stack<Integer> st = new Stack<>();
-        for(int i = arr.length - 1; i >= 0; i--){
-            while(st.size() > 0 && st.peek() <= arr[i]) st.pop();
+        for(int i = list.size() - 1; i >= 0; i--){
+            while(st.size() > 0 && st.peek() <= list.get(i)) st.pop();
             if(st.size() == 0) ans[i] = 0;
             else ans[i] = st.peek();
-            st.push(arr[i]);
+            st.push(list.get(i));
         }
         return ans;
     }
