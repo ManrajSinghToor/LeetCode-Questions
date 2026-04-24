@@ -26,15 +26,13 @@ class Solution {
         ListNode head2 = temp.next;
         temp.next = null;
 
-        ListNode dummy = new ListNode(0);
-        ListNode curr = dummy;
-        ListNode temp2 = head2;
-        while(temp2 != null){
-            curr.next = temp2;
+        if(head2 == null) return head2;
+
+        ListNode curr = head2;
+        while(curr.next != null){
             curr = curr.next;
-            temp2 = temp2.next;
-        } 
+        }
         curr.next = head;
-        return dummy.next;
+        return head2;
     }
 }
