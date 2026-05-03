@@ -66,9 +66,9 @@ class Solution {
             fakeTemp.next = t1;
             t1 = t1.next.next;
             fakeTemp = fakeTemp.next;
-            ansDummy.next = t2;
+            ansTemp.next = t2;
             if(t2.next != null) t2 = t2.next.next;
-            ansDummy = ansDummy.next;
+            ansTemp = ansTemp.next;
         }
         fakeTemp.next = null;
     }
