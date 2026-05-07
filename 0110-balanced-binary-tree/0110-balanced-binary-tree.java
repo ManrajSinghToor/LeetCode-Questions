@@ -14,19 +14,28 @@
  * }
  */
 class Solution {
-    public int solve(TreeNode root){
+    public int level(TreeNode root){
         if(root == null) return 0;
-
-        int left = solve(root.left);
-        int right = solve(root.right);
-        if(left == -1 || right == -1) return -1;
-
-        if(Math.abs(left - right) > 1) return -1;
-        else return 1 + Math.max(left,right);
-
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
+        int levels = 0;
+        while(!q.isEmpty()){
+            int size = q.size();
+            for(int i = 0; i < size; i++){
+                TreeNode n = q.remove();
+                if(n.left != null) q.add(n.left);
+                if(n.right != null) q.add(n.right);
+            }
+            levels++;
+        }
+        return levels;
     }
     public boolean isBalanced(TreeNode root) {
-        if(solve(root) == -1) return false;
-        else return true;
+        if(root == null) return true;
+        int leftLevels = level(root.left);
+        int rightLevels = level(root.right);
+
+        if(Math.abs(leftLevels - rightLevels) > 1) return false;
+        return isBalanced(root.left) && isBalanced(root.right);
     }
 }
