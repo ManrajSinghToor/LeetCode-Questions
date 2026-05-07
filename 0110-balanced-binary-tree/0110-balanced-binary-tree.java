@@ -16,19 +16,7 @@
 class Solution {
     public int level(TreeNode root){
         if(root == null) return 0;
-        Queue<TreeNode> q = new LinkedList<>();
-        q.add(root);
-        int levels = 0;
-        while(!q.isEmpty()){
-            int size = q.size();
-            for(int i = 0; i < size; i++){
-                TreeNode n = q.remove();
-                if(n.left != null) q.add(n.left);
-                if(n.right != null) q.add(n.right);
-            }
-            levels++;
-        }
-        return levels;
+        return 1 + Math.max(level(root.left), level(root.right));
     }
     public boolean isBalanced(TreeNode root) {
         if(root == null) return true;
