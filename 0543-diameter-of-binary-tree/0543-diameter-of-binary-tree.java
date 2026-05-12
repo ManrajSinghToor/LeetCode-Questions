@@ -14,18 +14,17 @@
  * }
  */
 class Solution {
-    int sum = 0;
-    public int recurs(TreeNode root){
+    int max = 0;
+    public int levels(TreeNode root){
         if(root == null) return 0;
+        int left = levels(root.left);
+        int right = levels(root.right);
 
-        int left = recurs(root.left);
-        int right = recurs(root.right);
-
-        sum = Math.max(sum, left + right);
+        max = Math.max(max, left + right);
         return 1 + Math.max(left, right);
     }
     public int diameterOfBinaryTree(TreeNode root) {
-        recurs(root);
-        return sum;
+        levels(root);
+        return max;
     }
 }
