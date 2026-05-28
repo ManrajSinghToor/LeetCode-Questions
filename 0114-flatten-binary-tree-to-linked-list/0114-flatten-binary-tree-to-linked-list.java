@@ -14,25 +14,22 @@
  * }
  */
 class Solution {
-    public void convertToList(TreeNode root, List<Integer> ans){
-        if(root == null) return ;
-
-        ans.add(root.val);
-        convertToList(root.left, ans);
-        convertToList(root.right, ans);
-    }
-    public void convertToLL(TreeNode root, List<Integer> ans, int idx){
-        if(idx == ans.size()) return ;
-
-        root.left = null;
-        root.right = new TreeNode(ans.get(idx));
-        convertToLL(root.right, ans, idx + 1);
-    }
     public void flatten(TreeNode root) {
-        if(root == null) return ;
-        
-        List<Integer> ans = new ArrayList<>();
-        convertToList(root, ans);
-        convertToLL(root, ans, 1);
+        TreeNode curr = root;
+        while(curr != null){
+            if(curr.left != null){
+                TreeNode pred = curr.left;
+                while(pred.right != null) pred = pred.right;
+                if(pred.right == null) {
+                    pred.right = curr.right;
+                    curr.right = curr.left;
+                    curr.left = null;
+                    curr = curr.right;
+                }
+            }
+            else {
+                curr = curr.right;
+            }
+        }
     }
 }
