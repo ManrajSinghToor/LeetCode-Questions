@@ -1,6 +1,6 @@
 class Solution {
-    public int val(char ch){
-        switch(ch){
+    public int values(char c){
+        switch(c){
             case 'I': return 1;
             case 'V': return 5;
             case 'X': return 10;
@@ -16,12 +16,12 @@ class Solution {
         int ans = 0;
         for(int i = 0; i < n; i++){
             char ch = s.charAt(i);
-            if((i + 1 < n) && val(ch) < val(s.charAt(i+1))){
-                ans -= val(ch);
+            if((i + 1 < n) && values(ch) < values((s.charAt(i + 1)))){
+                ans -= values(ch);
             }
-            else{
-                ans += val(ch);
-            }
+            else {
+                ans += values(ch);
+            } 
         }
         return ans;
     }
