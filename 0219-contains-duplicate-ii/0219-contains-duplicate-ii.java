@@ -5,11 +5,11 @@ class Solution {
         for(int i = 0; i < n; i++){
             if(map.containsKey(nums[i])){
                 if((i - map.get(nums[i])) <= k) return true;
-                map.put(nums[i], i);
+                // map.put(nums[i], i);
             }
-            else {
+            // else {
                 map.put(nums[i], i);
-            }
+            // }
         }
         return false;
     }
