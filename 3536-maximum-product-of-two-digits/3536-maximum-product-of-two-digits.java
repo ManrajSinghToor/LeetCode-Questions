@@ -3,12 +3,12 @@ class Solution {
         int max1 = -1;
         int max2 = -1;
         while (n > 0) {
-            int digit = n % 10;
-            if (digit >= max1) {
+            int ld = n % 10;
+            if (ld >= max1) {
                 max2 = max1;
-                max1 = digit;
-            } else if (digit > max2) {
-                max2 = digit;
+                max1 = ld;
+            } else if (ld > max2) {
+                max2 = ld;
             }
             n /= 10;
         }
