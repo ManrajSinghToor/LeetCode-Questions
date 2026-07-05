@@ -4,7 +4,7 @@ class Solution {
         for(int i = 0; i < nums.length; i++){
             xor ^= nums[i];
         }
-        int newXor = (xor & (xor - 1) ^ xor);
+        int newXor =  xor & -xor;
         int bucket1 = 0;
         int bucket2 = 0;
         for(int i = 0; i < nums.length; i++){
