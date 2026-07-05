@@ -6,8 +6,8 @@ class Solution {
             freq[s.charAt(i) - 'a']++;
             freq[t.charAt(i) - 'a']--;
         }
-        for(int count : freq){
-            if(count != 0) return false;
+        for(int ele : freq){
+            if(ele != 0) return false;
         }
         return true;
     }
