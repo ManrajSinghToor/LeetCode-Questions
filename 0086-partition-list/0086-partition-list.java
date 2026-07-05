@@ -10,11 +10,11 @@
  */
 class Solution {
     public ListNode partition(ListNode head, int x) {
-        if(head == null || head.next == null) return head;
-        ListNode small = new ListNode(-1);
-        ListNode large = new ListNode(0);
-        ListNode t1 = small;
-        ListNode t2 = large;
+        ListNode d1 = new ListNode(0);
+        ListNode t1 = d1;
+
+        ListNode d2 = new ListNode(0);
+        ListNode t2 = d2;
 
         ListNode temp = head;
         while(temp != null){
@@ -30,7 +30,7 @@ class Solution {
             }
         }
         t2.next = null;
-        t1.next = large.next;
-        return small.next;
+        t1.next = d2.next;
+        return d1.next;
     }
 }
