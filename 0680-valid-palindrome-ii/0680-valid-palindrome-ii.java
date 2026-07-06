@@ -8,7 +8,6 @@ class Solution {
         return true;
     }
     public boolean validPalindrome(String s) {
-        boolean ans = true;
         int i = 0, j = s.length() - 1;
         while(i < j){
             if(s.charAt(i) != s.charAt(j)){
@@ -19,6 +18,6 @@ class Solution {
                 j--;
             }
         }   
-        return ans;
+        return true;
     }
 }
