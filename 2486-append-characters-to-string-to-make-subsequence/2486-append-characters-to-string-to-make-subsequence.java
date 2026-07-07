@@ -12,10 +12,6 @@ class Solution {
                 j++;
             }
         }
-        if(j == t.length()) return 0;
-        else {
-            cnt += t.length() - j;
-            return cnt;
-        }
+        return t.length() - j;
     }
 }
