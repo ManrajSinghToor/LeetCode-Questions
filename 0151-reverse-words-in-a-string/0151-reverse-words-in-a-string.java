@@ -1,16 +1,50 @@
 class Solution {
     public String reverseWords(String s) {
-        String trimed = s.trim();
-        String[] arr = trimed.split("\\s+");
+        int l = 0;
+        while(l < s.length()){
+            if(s.charAt(l) == ' ') l++;
+            else break;
+        }
+        int r = s.length() - 1;
+        while(r >= 0){
+            if(s.charAt(r) == ' ') r--;
+            else break;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        while(l <= r){
+            char ch = s.charAt(l);
+            if(ch != ' ') sb.append(ch);
+            else if(ch == ' ' && sb.charAt(sb.length() - 1) != ' ') sb.append(ch);
+            l++;
+        }
+
         int i = 0;
-        int j = arr.length - 1;
+        int j = sb.length() - 1;
         while(i < j){
-            String temp = arr[i];
-            arr[i] = arr[j];
-            arr[j] = temp;
+            char temp = sb.charAt(i);
+            sb.setCharAt(i, sb.charAt(j));
+            sb.setCharAt(j, temp);
             i++;
             j--;
         }
-        return String.join(" ", arr);
+
+        int start = 0;
+        while (start < sb.length()) {
+            int end = start;
+            while (end < sb.length() && sb.charAt(end) != ' ') end++;
+            int left = start;
+            int right = end - 1;
+
+            while (left < right) {
+                char temp = sb.charAt(left);
+                sb.setCharAt(left, sb.charAt(right));
+                sb.setCharAt(right, temp);
+                left++;
+                right--;
+            }
+            start = end + 1;
+        }
+        return sb.toString();
     }
 }
