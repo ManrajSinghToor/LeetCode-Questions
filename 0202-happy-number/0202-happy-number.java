@@ -1,18 +1,20 @@
 class Solution {
+    public int sumOfSquares(int n){
+        int sum = 0;
+        while(n > 0){
+            int ld = n % 10;
+            n /= 10;
+            sum += ld * ld;
+        }
+        return sum;
+    }
     public boolean isHappy(int n) {
-        HashSet<Integer> set = new HashSet<>();
-        while(n > 1){
-            if(set.contains(n)){
-                return false;
-            }
-            set.add(n);
-            int ans = 0;
-            while(n > 0){
-                int ld = n % 10;
-                n /= 10;
-                ans += ld * ld;
-            }
-            n = ans;
+        int slow = n, fast = n;
+        while(fast != 1){
+            slow = sumOfSquares(slow);
+            fast = sumOfSquares(sumOfSquares(fast));
+            if(fast == 1) return true;
+            if(slow == fast) return false;
         }
         return true;
     }
