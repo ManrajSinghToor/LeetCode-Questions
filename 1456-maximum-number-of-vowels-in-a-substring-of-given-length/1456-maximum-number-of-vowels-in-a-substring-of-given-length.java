@@ -1,6 +1,6 @@
 class Solution {
     public int maxVowels(String s, int k) {
-        //T.C - O(n), S.C - O(n)
+        //T.C - O(n), S.C - O(1)
         int i = 0;
         int j = 0;
         int max = 0;
