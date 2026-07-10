@@ -1,35 +1,21 @@
 class Solution {
     public long maximumSubarraySum(int[] nums, int k) {
-        long max = 0;
-        long sum = 0;
-
         Map<Integer, Integer> map = new HashMap<>();
-        int isDup = 0;
+        long sum = 0;
+        long max = 0;
 
-        for(int i = 0; i < k; i++){
-            if(map.containsKey(nums[i])) map.put(nums[i], map.get(nums[i]) + 1);
-            else map.put(nums[i], 1);
-
+        for (int i = 0; i < nums.length; i++) {
             sum += nums[i];
-
-            if(map.get(nums[i]) > 1) isDup++;
-        }
-        if(isDup == 0) max = Math.max(sum, max);
-
-        for(int i = k; i < nums.length; i++){
-            int numToAdd = nums[i];
-            int numToRemove = nums[i - k];
-            if(map.containsKey(numToAdd)) map.put(numToAdd, map.get(numToAdd) + 1);
-            else map.put(numToAdd, 1);
-
-            sum += numToAdd;
-            if(map.get(numToAdd) > 1) isDup++;
-
-            if(map.get(numToRemove) > 1) isDup--;
-            map.put(numToRemove, map.get(numToRemove) - 1);
-
-            sum -= numToRemove;
-            if(isDup == 0) max = Math.max(sum, max);
+            map.put(nums[i], map.getOrDefault(nums[i], 0) + 1);
+            if (i >= k) {
+                sum -= nums[i - k];
+                map.put(nums[i - k], map.get(nums[i - k]) - 1);
+                if (map.get(nums[i - k]) == 0)
+                    map.remove(nums[i - k]);
+            }
+            if (i >= k - 1 && map.size() == k) {
+                max = Math.max(max, sum);
+            }
         }
         return max;
     }
