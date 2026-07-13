@@ -8,7 +8,6 @@ class Solution {
         while (j < nums.length) {
             while (!dq.isEmpty() && nums[dq.peekLast()] < nums[j]) dq.pollLast();
             dq.offerLast(j);
-
             if (j - i + 1 == k) {
                 ans[idx++] = nums[dq.peekFirst()];
                 if (dq.peekFirst() == i) dq.pollFirst();
