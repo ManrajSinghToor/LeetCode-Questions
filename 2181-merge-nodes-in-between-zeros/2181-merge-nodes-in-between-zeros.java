@@ -10,29 +10,50 @@
  */
 class Solution {
     public ListNode mergeNodes(ListNode head) {
-        ListNode dummy = new ListNode(0);
-        ListNode temp = dummy;
+        // ListNode dummy = new ListNode(0);
+        // ListNode temp = dummy;
 
-        ListNode first = head;
+        // ListNode first = head;
 
-        while(first.next != null) {
-            ListNode second = first.next;
-            while(second != null && second.val != 0) second = second.next;
+        // while(first.next != null) {
+        //     ListNode second = first.next;
+        //     while(second != null && second.val != 0) second = second.next;
+
+        //     int sum = 0;
+        //     ListNode sumKaro = first.next;
+        //     while(sumKaro != second){
+        //         sum += sumKaro.val;
+        //         sumKaro = sumKaro.next;
+        //     }
+
+        //     if(sum > 0){
+        //         ListNode newNode = new ListNode(sum);
+        //         temp.next = newNode;
+        //         temp = temp.next;
+        //     }
+        //     first = second;
+        // }
+        // return dummy.next;
+        ListNode modify = head.next;
+        ListNode nextSum = modify;
+
+        while (nextSum != null) {
 
             int sum = 0;
-            ListNode sumKaro = first.next;
-            while(sumKaro != second){
-                sum += sumKaro.val;
-                sumKaro = sumKaro.next;
+
+            while (nextSum.val != 0) {
+                sum += nextSum.val;
+                nextSum = nextSum.next;
             }
 
-            if(sum > 0){
-                ListNode newNode = new ListNode(sum);
-                temp.next = newNode;
-                temp = temp.next;
-            }
-            first = second;
+            modify.val = sum;
+
+            nextSum = nextSum.next;
+            modify.next = nextSum;
+
+            modify = nextSum;
         }
-        return dummy.next;
+
+        return head.next;
     }
 }
