@@ -14,7 +14,6 @@ class Solution {
         ListNode sumKaro = curr;
 
         while (sumKaro != null) {
-
             int sum = 0;
             while (sumKaro.val != 0) {
                 sum += sumKaro.val;
@@ -22,7 +21,8 @@ class Solution {
             }
 
             curr.val = sum;
-            sumKaro = sumKaro.next;
+            sumKaro = sumKaro.next; //vo Zero pe haii usko aage karo.
+
             curr.next = sumKaro;
             curr = sumKaro;
         }
