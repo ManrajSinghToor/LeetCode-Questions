@@ -6,11 +6,11 @@ class Solution {
     public long gcdSum(int[] nums) {
         int[] prefix = new int[nums.length];
         long ans = 0;
-        int mx = 0;
-        
+        int max = 0;
+
         for (int i = 0; i < nums.length; i++) {
-            mx = Math.max(mx, nums[i]);
-            prefix[i] = gcd(nums[i], mx);
+            max = Math.max(max, nums[i]);
+            prefix[i] = gcd(nums[i], max);
         }
 
         Arrays.sort(prefix);
