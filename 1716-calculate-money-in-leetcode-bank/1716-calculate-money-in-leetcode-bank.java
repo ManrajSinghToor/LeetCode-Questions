@@ -1,13 +1,13 @@
 class Solution {
     public int totalMoney(int n) {
         int sum = 0;
-        int lastMon = 2;
+        int lastMon = 1;
         int days = 1;
         for(int i = 1; i <= n; i++){
             sum += days;
             days++;
             if(i % 7 == 0) {
-                days = lastMon;
+                days = lastMon + 1;
                 lastMon++;
             }
         }
