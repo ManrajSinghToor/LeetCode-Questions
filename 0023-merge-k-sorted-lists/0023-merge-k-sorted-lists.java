@@ -9,54 +9,55 @@
  * }
  */
 class Solution {
-    public ListNode mergeLists(ListNode head1, ListNode head2) {
+    public ListNode merge(ListNode head1, ListNode head2){
         ListNode dummy = new ListNode(0);
         ListNode temp = dummy;
 
         ListNode t1 = head1;
         ListNode t2 = head2;
-        while (t1 != null && t2 != null) {
-            if (t1.val <= t2.val) {
+        while(t1 != null && t2 != null){
+            if(t1.val <= t2.val){
                 temp.next = t1;
                 t1 = t1.next;
-            } else {
+            }
+            else {
                 temp.next = t2;
                 t2 = t2.next;
             }
             temp = temp.next;
         }
-        while (t1 != null) {
+        while(t1 != null){
             temp.next = t1;
             t1 = t1.next;
             temp = temp.next;
         }
-        while (t2 != null) {
+        while(t2 != null){
             temp.next = t2;
             t2 = t2.next;
             temp = temp.next;
         }
         return dummy.next;
     }
-
     public ListNode mergeKLists(ListNode[] lists) {
-        if (lists == null || lists.length == 0)
-            return null;
+        if(lists == null || lists.length == 0) return null;
 
-        ArrayList<ListNode> arr = new ArrayList<>();
-        for (ListNode n : lists)
-            arr.add(n);
+        ArrayList<ListNode> ans = new ArrayList<>();
+        for(ListNode ele : lists){
+            ans.add(ele);
+        }
 
-        while (arr.size() > 1) {
-            ArrayList<ListNode> next = new ArrayList<>();
-            for (int i = 0; i < arr.size(); i += 2) {
-                if (i + 1 < arr.size()) {
-                    next.add(mergeLists(arr.get(i), arr.get(i + 1)));
-                } else {
-                    next.add(arr.get(i));
+        while(ans.size() > 1){
+            ArrayList<ListNode> sublist = new ArrayList<>();
+            for(int i = 0; i < ans.size(); i += 2){
+                if(i + 1 < ans.size()){
+                    sublist.add(merge(ans.get(i), ans.get(i + 1)));
+                }
+                else {
+                    sublist.add(ans.get(i));
                 }
             }
-            arr = next;
+            ans = sublist;
         }
-        return arr.get(0);
-    }
+        return ans.get(0);
+    } 
 }
