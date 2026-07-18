@@ -10,7 +10,7 @@
  */
 class Solution {
     public ListNode rev(ListNode head){
-        ListNode curr = head, forw = null, prev = null;
+        ListNode prev = null, forw = null, curr = head;
         while(curr != null){
             forw = curr.next;
             curr.next = prev;
@@ -21,11 +21,12 @@ class Solution {
     }
     public int pairSum(ListNode head) {
         ListNode temp = head;
-        int cnt = 0;
-        while(temp != null){
+        int cnt = 1;
+        while(temp.next != null){
             cnt++;
             temp = temp.next;
         }
+
         temp = head;
         for(int i = 0; i < ((cnt / 2) - 1); i++){
             temp = temp.next;
@@ -34,6 +35,7 @@ class Solution {
         temp.next = null;
 
         newHead = rev(newHead);
+
         temp = head;
         ListNode temp2 = newHead;
         int maxSum = 0;
@@ -43,7 +45,7 @@ class Solution {
             sum += temp2.val;
             temp = temp.next;
             temp2 = temp2.next;
-            maxSum = Math.max(sum, maxSum);
+            maxSum = Math.max(maxSum, sum);
         }
         return maxSum;
     }
