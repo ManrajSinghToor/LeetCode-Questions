@@ -10,11 +10,10 @@
  */
 class Solution {
     public void recurs(ListNode prev, ListNode curr){
-        if(curr == null || curr.next == null) return ;
-        ListNode f = curr.next;
-        curr.next = f.next;
-        f.next = curr;
-        prev.next = f;
+        if(curr == null || curr.next == null) return ;            ListNode forw = curr.next;
+        curr.next = forw.next;
+        forw.next = curr;
+        prev.next = forw;
         recurs(curr, curr.next);
     }
     public ListNode swapPairs(ListNode head) {
