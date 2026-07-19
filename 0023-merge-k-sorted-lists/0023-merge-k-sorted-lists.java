@@ -40,24 +40,20 @@ class Solution {
     }
     public ListNode mergeKLists(ListNode[] lists) {
         if(lists == null || lists.length == 0) return null;
-
-        ArrayList<ListNode> ans = new ArrayList<>();
-        for(ListNode ele : lists){
-            ans.add(ele);
+        
+        List<ListNode> list = new ArrayList<>();
+        for(ListNode nodes : lists){
+            list.add(nodes);
         }
 
-        while(ans.size() > 1){
-            ArrayList<ListNode> sublist = new ArrayList<>();
-            for(int i = 0; i < ans.size(); i += 2){
-                if(i + 1 < ans.size()){
-                    sublist.add(merge(ans.get(i), ans.get(i + 1)));
-                }
-                else {
-                    sublist.add(ans.get(i));
-                }
+        while(list.size() > 1){
+            List<ListNode> subList = new ArrayList<>();
+            for(int i = 0; i < list.size(); i += 2){
+                if(i + 1 < list.size()) subList.add(merge(list.get(i), list.get(i + 1)));
+                else subList.add(list.get(i));
             }
-            ans = sublist;
+            list = subList;
         }
-        return ans.get(0);
-    } 
+        return list.get(0);
+    }
 }
