@@ -12,34 +12,31 @@ class Solution {
     public int[] nodesBetweenCriticalPoints(ListNode head) {
         int[] arr = {-1, -1};
 
-        if(head.next.next == null) return arr;
-        int count = 0;
+        int cnt = 0;
+        int minAns = Integer.MAX_VALUE;
+        int maxAns = 0;
         int firstIdx = -1;
         int lastIdx = -1;
-        int minDist = Integer.MAX_VALUE;
-        int maxDist = 0;
-
-        ListNode temp = head.next;
+        ListNode temp = head;
         ListNode prev = head;
         while(temp.next != null){
-            if(temp.val > prev.val && temp.val > temp.next.val
-            || temp.val < prev.val && temp.val < temp.next.val){
-                if(firstIdx == -1) firstIdx = count;
-                if(lastIdx != -1) {
-                    minDist = Math.min(minDist, count - lastIdx);
+            if(temp.val > temp.next.val && temp.val > prev.val 
+            || temp.val < temp.next.val && temp.val < prev.val){
+                if(firstIdx == -1) firstIdx = cnt;
+                if(lastIdx != -1){
+                    minAns = Math.min(minAns, cnt - lastIdx);
                 }
-                lastIdx = count;
+                lastIdx = cnt;
             }
-            count++;
+            cnt++;
             prev = temp;
             temp = temp.next;
         }
-
-        maxDist = lastIdx - firstIdx;
-        if(minDist == Integer.MAX_VALUE) minDist = -1;
-        if(maxDist == 0) maxDist = -1;
-        arr[0] = minDist;
-        arr[1] = maxDist;
+        maxAns = lastIdx - firstIdx;
+        if(minAns == Integer.MAX_VALUE) minAns = -1;
+        if(maxAns == 0) maxAns = -1;
+        arr[0] = minAns;
+        arr[1] = maxAns;
 
         return arr;
     }
