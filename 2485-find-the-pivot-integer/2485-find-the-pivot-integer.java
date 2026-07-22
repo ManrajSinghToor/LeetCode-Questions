@@ -8,6 +8,7 @@ class Solution {
             int right = sum - left - i;
 
             if(left == right) return i;
+            if(left > right) break;
             left += i;
         }
         return -1;
