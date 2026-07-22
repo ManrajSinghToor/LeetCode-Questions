@@ -16,7 +16,7 @@ class Solution {
         while(j < nums2.length){
             ans[k++] = nums2[j++];
         }
-        double median = 0;
+        
         if(ans.length % 2 == 0) {
             return (ans[ans.length / 2] + ans[(ans.length / 2) - 1])/ 2.0;
         }
