@@ -7,9 +7,12 @@ class Solution {
             sum += num;
             int rem = sum % k;
             if (rem < 0) rem += k;
-            if (map.containsKey(rem)) max += map.get(rem);
+            // if (map.containsKey(rem)) max += map.get(rem);
 
-            if(map.containsKey(rem)) map.put(rem, map.get(rem) + 1);
+            if(map.containsKey(rem)) {
+                max += map.get(rem);
+                map.put(rem, map.get(rem) + 1);
+            }
             else map.put(rem, 1);
         }
 
