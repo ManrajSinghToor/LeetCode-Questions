@@ -1,12 +1,18 @@
 class Solution {
     public char findTheDifference(String s, String t) {
-        int sum = 0, sum2 = 0;
-        for(int ele : s.toCharArray()){
-            sum += ele;
+        HashMap<Character, Integer> map = new HashMap<>();
+        
+        for (char c : s.toCharArray()) {
+            map.put(c, map.getOrDefault(c, 0) + 1);
         }
-        for(int ele : t.toCharArray()){
-            sum2 += ele;
+        
+        for (char c : t.toCharArray()) {
+            if (!map.containsKey(c) || map.get(c) == 0) {
+                return c;
+            }
+            map.put(c, map.get(c) - 1);
         }
-        return (char) (sum2 - sum);
+        
+        return ' ';
     }
 }
