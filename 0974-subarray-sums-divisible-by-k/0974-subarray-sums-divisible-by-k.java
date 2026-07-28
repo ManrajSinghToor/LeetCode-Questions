@@ -7,7 +7,6 @@ class Solution {
             sum += num;
             int rem = sum % k;
             if (rem < 0) rem += k;
-            // if (map.containsKey(rem)) max += map.get(rem);
 
             if(map.containsKey(rem)) {
                 max += map.get(rem);
