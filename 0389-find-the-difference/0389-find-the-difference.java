@@ -1,7 +1,6 @@
 class Solution {
     public char findTheDifference(String s, String t) {
         HashMap<Character, Integer> map = new HashMap<>();
-        
         for (char c : s.toCharArray()) {
             map.put(c, map.getOrDefault(c, 0) + 1);
         }
