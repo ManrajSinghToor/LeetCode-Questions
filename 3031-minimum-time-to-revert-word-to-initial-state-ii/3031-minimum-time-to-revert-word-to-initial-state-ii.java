@@ -19,9 +19,8 @@ class Solution {
     }
     public int minimumTimeToInitialState(String word, int k) {
         int n = word.length();
-        String original = word;
         int[] z = buildArr(word, n);
-        
+
         for(int i = 1; i * k < n; i++) {
             int removed = i * k;
             if(z[removed] >= n - removed) {
