@@ -1,21 +1,16 @@
 class Solution {
     public int largestSumAfterKNegations(int[] nums, int k) {
-        Arrays.sort(nums);
-        int i = 0;
-        while(i < nums.length && k > 0){
-            if(nums[i] < 0){
-                nums[i] = -nums[i];
-                k--;
-            }
-            i++;
+        PriorityQueue<Integer> pq = new PriorityQueue();
+        for(int i : nums){
+            pq.add(i);
+        }
+        while(k-- > 0){
+            pq.add(-pq.remove());
         }
         int sum = 0;
-        int min = Integer.MAX_VALUE;
-        for(int idx : nums){
-            sum += idx;
-            min = Math.min(min, idx);
+        for(int i : pq) {
+            sum += i;
         }
-        return k % 2 == 0? sum : sum - 2 * min;
-
+        return sum;
     }
 }
