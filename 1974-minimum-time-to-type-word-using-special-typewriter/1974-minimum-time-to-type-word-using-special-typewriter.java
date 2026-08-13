@@ -6,10 +6,10 @@ class Solution {
         while(i < word.length()) {
             int diff = Math.abs(word.charAt(i) - curr);
             time += Math.min(diff, 26 - diff);
-            time++;
+            // time++;
             curr = word.charAt(i);
             i++;
         }
-        return time;
+        return time + word.length();
     }
 }
