@@ -1,15 +1,13 @@
 class Solution {
-    public int maxProfit(int[] arr) {
-        int n = arr.length;
+    public int maxProfit(int[] prices) {
+        int n = prices.length;
+        int buyDay = Integer.MAX_VALUE;
         int profit = 0;
-        int buyDay = arr[0];
-        for(int i = 1; i < n; i++){
-            if(arr[i] < buyDay){
-                buyDay = arr[i];
+        for(int i = 0; i < n; i++){
+            if(buyDay > prices[i]) {
+                buyDay = prices[i];
             }
-            else{
-                profit = Math.max(arr[i] - buyDay, profit);
-            }
+            profit = Math.max(profit, prices[i] - buyDay);
         }
         return profit;
     }
