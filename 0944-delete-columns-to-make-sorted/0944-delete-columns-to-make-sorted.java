@@ -10,7 +10,6 @@ class Solution {
                     break;
                 }
             }
-            if(cnt == n) return cnt;
         }
         return cnt;
     }
