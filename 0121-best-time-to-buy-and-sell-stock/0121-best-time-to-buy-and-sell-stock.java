@@ -4,9 +4,7 @@ class Solution {
         int buyDay = Integer.MAX_VALUE;
         int profit = 0;
         for(int i = 0; i < n; i++){
-            if(buyDay > prices[i]) {
-                buyDay = prices[i];
-            }
+            buyDay = Math.min(buyDay, prices[i]);
             profit = Math.max(profit, prices[i] - buyDay);
         }
         return profit;
