@@ -12,21 +12,20 @@ class Pair implements Comparable<Pair> {
 }
 class Solution {
     public String frequencySort(String s) {
-        HashMap<Character, Integer> map = new HashMap<>();
+        int[] freq = new int[128];
         for(int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
-            if(map.containsKey(c)) map.put(c, map.get(c) + 1);
-            else map.put(c, 1);
+            freq[(int)c]++;
         }
         PriorityQueue<Pair> pq = new PriorityQueue<>();
-        for(char key : map.keySet()) {
-            pq.add(new Pair(key, map.get(key)));
+        for(int i = 0; i < 128; i++) {
+            if(freq[i] > 0) pq.add(new Pair((char) i, freq[i]));
         }
         StringBuilder sb = new StringBuilder();
         while(!pq.isEmpty()) {
             Pair top = pq.remove();
-            int freq = top.val;
-            while(freq-- > 0) {
+            int frequency = top.val;
+            while(frequency-- > 0) {
                 sb.append((char) top.key);
             }
         }
