@@ -1,19 +1,18 @@
 class Solution {
-    public void recurs(List<List<Integer>> ans, List<Integer> res, int n, int k, int idx){
-        if(res.size() == k){
-            ans.add(new ArrayList<>(res));
-            return;
+    public void backTrack(int idx, int n, int k, List<Integer> list, List<List<Integer>> ans){
+        if(list.size() == k) {
+            ans.add(new ArrayList<>(list));
+            return ;
         }
-        for(int i = idx; i <= n; i++){
-            res.add(i);
-            recurs(ans, res, n, k, i + 1);
-            res.remove(res.size() - 1);
+        for(int i = idx; i <= n; i++) {
+            list.add(i);
+            backTrack(i + 1, n, k, list, ans);
+            list.remove(list.size() - 1);
         }
     }
     public List<List<Integer>> combine(int n, int k) {
         List<List<Integer>> ans = new ArrayList<>();
-        List<Integer> res = new ArrayList<>();
-        recurs(ans, res, n, k, 1);
+        backTrack(1, n, k, new ArrayList<>(), ans);
         return ans;
     }
 }
