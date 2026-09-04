@@ -1,11 +1,13 @@
 class Solution {
-    Map<Integer, Integer> map = new HashMap<>();
-    public int fib(int n) {
-        if(map.containsKey(n)) return map.get(n);
+    public int fibo(int n, int[] dp) {
         if(n <= 1) return n;
-        int res = fib(n - 1)+fib(n - 2);
+        if(dp[n] != 0) return dp[n];
+        int ans = fib(n - 1) + fib(n - 2);
+        return ans;
+    }
+    public int fib(int n) {
 
-        map.put(n, res);
-        return res;
+        int[] dp = new int[n + 1];
+        return fibo(n, dp);
     }
 }
