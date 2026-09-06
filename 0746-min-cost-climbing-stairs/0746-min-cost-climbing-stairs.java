@@ -1,15 +1,13 @@
 class Solution {
-    static int[] dp;
-    public int climb(int idx, int[] cost) {
-        if(idx >= cost.length) return 0;
-        if(dp[idx] != -1) return dp[idx];
-        int ans = cost[idx] + Math.min(climb(idx + 1, cost), climb(idx + 2, cost));
-        dp[idx] = ans;
-        return ans;
-    }
     public int minCostClimbingStairs(int[] cost) {
-        dp = new int[cost.length];
-        Arrays.fill(dp, -1);
-        return Math.min(climb(0, cost), climb(1, cost));
+        int n = cost.length;
+        int[] dp = new int[n];
+        if(cost.length == 1) return cost[0];
+        dp[0] = cost[0];
+        dp[1] = cost[1];
+        for(int i = 2; i < n; i++) {
+            dp[i] = Math.min(cost[i] + dp[i - 1], cost[i] + dp[i - 2]);
+        }
+        return Math.min(dp[n - 1], dp[n- 2]);
     }
 }
