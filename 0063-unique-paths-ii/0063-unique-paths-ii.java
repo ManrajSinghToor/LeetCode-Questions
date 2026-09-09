@@ -1,21 +1,23 @@
 class Solution {
-    static int[][] dp;
-    public int uniPath(int r, int c, int lr, int lc, int[][] arr) {
-        if(r == lr && c == lc) return 1;
-        if(r > lr || c > lc || arr[r][c] == 1) return 0;
-        if(dp[r][c] != -1) return dp[r][c];
-        int down = uniPath(r + 1, c, lr, lc, arr);
-        int right = uniPath(r, c + 1, lr, lc, arr);
-        int ans = down + right;
-        dp[r][c] = ans;
-        return ans;
-    }
-    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
-        int n = obstacleGrid.length;
-        int m = obstacleGrid[0].length;
-        if(obstacleGrid[0][0] == 1 || obstacleGrid[n - 1][m - 1] == 1) return 0;
-        dp = new int[n][m];
-        Arrays.stream(dp).forEach(row -> Arrays.fill(row, -1));
-        return uniPath(0, 0, n - 1, m - 1, obstacleGrid);
+    public int uniquePathsWithObstacles(int[][] arr) {
+        int n = arr.length;
+        int m = arr[0].length;
+        int[][] dp = new int[n][m];
+        if(arr[0][0] == 1 || arr[n - 1][m - 1] == 1) return 0;
+        for(int i = 0; i < n; i++) {
+            if(arr[i][0] == 0) dp[i][0] = 1; 
+            else break;
+        }
+        for(int j = 0; j < m; j++) {
+            if(arr[0][j] == 0) dp[0][j] = 1;
+            else break;
+        }
+        for(int i = 1; i < n; i++) {
+            for(int j = 1; j < m; j++) {
+                if(arr[i][j] == 1) dp[i][j] = 0;
+                else dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+            }
+        }
+        return dp[n - 1][m - 1];
     }
 }
