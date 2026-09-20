@@ -14,7 +14,7 @@ class Solution {
         return ans;
     }
     public int findTargetSumWays(int[] nums, int target) {
-        for(int ele : nums) absSum += Math.abs(ele);
+        for(int ele : nums) absSum += ele;
         dp = new int[nums.length][2 * absSum + 1];
         Arrays.stream(dp).forEach(row -> Arrays.fill(row, -1));
         return targetSum(0, 0, nums, target);
