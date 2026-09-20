@@ -16,7 +16,6 @@ class Solution {
     }
     public int longestPalindromeSubseq(String s) {
         int n = s.length();
-        if(n == 1) return 1;
         dp = new int[n][n];
         Arrays.stream(dp).forEach(row -> Arrays.fill(row, -1));
         return lps(0, n - 1, new StringBuilder(s));
