@@ -1,20 +1,20 @@
 class MyCircularQueue {
+    int maxSize;
     int[] arr;
-    int cap;
     int front;
     int rear;
     int size;
     public MyCircularQueue(int k) {
-        this.cap = k;
-        this.arr = new int[k];
-        this.front = 0;
-        this.rear = -1;
-        this.size = 0;
+        maxSize = k;
+        arr = new int[maxSize];
+        front = 0;
+        rear = -1;
+        size = 0;
     }
     
     public boolean enQueue(int value) {
-        if(size == cap) return false;
-        rear = (rear + 1) % cap;
+        if(size == maxSize) return false;
+        rear = (rear + 1) % maxSize;
         arr[rear] = value;
         size++;
         return true;
@@ -22,7 +22,7 @@ class MyCircularQueue {
     
     public boolean deQueue() {
         if(size == 0) return false;
-        front = (front + 1) % cap;
+        front = (front + 1) % maxSize;
         size--;
         return true;
     }
@@ -42,7 +42,7 @@ class MyCircularQueue {
     }
     
     public boolean isFull() {
-        return size == cap;
+        return size == maxSize;
     }
 }
 
