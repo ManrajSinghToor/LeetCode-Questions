@@ -1,20 +1,41 @@
+class inter implements Comparable<inter> {
+    int st;
+    int et;
+    inter(int st, int et) {
+        this.st = st;
+        this.et = et;
+    }
+    public int compareTo(inter i) {
+        return Integer.compare(this.st, i.st);
+    }
+}
 class Solution {
     public int[][] merge(int[][] intervals) {
-        Arrays.sort(intervals, (a,b) -> a[0] - b[0]);
-        List<int []> res = new ArrayList();
-        int[] prev = intervals[0];
-        res.add(prev);
-        for(int i = 1;i < intervals.length; i++){
-            int ps = prev[0];
-            int pe = prev[1];
-            int cs = intervals[i][0];
-            int ce = intervals[i][1];
-            if(cs <= pe) prev[1] = Math.max(pe, ce);
+        List<inter> list = new ArrayList<>();
+        for(int i = 0; i < intervals.length; i++) {
+            list.add(new inter(intervals[i][0], intervals[i][1]));
+        }
+
+        Collections.sort(list);
+        List<inter> ans = new ArrayList<>();
+        inter prev = list.get(0);
+        ans.add(prev);
+        for(int i = 1; i < list.size(); i++) {
+            inter curr = list.get(i);
+            if(curr.st <= prev.et) {
+                prev.et = Math.max(curr.et, prev.et);
+            }
             else {
-                prev = intervals[i]; 
-                res.add(prev);
+                prev = curr;
+                ans.add(prev);
             }
         }
-        return res.toArray(new int[res.size()][2]);
+
+        int[][] res = new int[ans.size()][2];
+        for(int i = 0; i < res.length; i++) {
+            res[i][0] = ans.get(i).st;
+            res[i][1] = ans.get(i).et;
+        }
+        return res;
     }
 }
