@@ -1,26 +1,18 @@
 class Solution {
-    static int[][] dp;
-    public int sqr(int idx, int sum, int n) {
-        if(sum == n) return 0;
-        if(sum > n || idx * idx > n) return Integer.MAX_VALUE;
-        if(dp[idx][sum] != -1) return dp[idx][sum];
-        int pick = Integer.MAX_VALUE;
-        int sqrNum = idx * idx;
-        if(sum + sqrNum <= n)        {
-            pick = sqr(idx, sum + sqrNum, n);
-            if(pick != Integer.MAX_VALUE) pick += 1;
+    public int sqr(int n, int[] dp) {
+        if (n == 0) return 0;
+        if (dp[n] != -1) return dp[n];
+        int ans = Integer.MAX_VALUE;
+        for (int i = 1; i * i <= n; i++) {
+            int recur = sqr(n - i * i, dp);
+            ans = Math.min(ans, 1 + recur);
         }
-        int skip = sqr(idx + 1, sum, n);
-        int ans = Math.min(skip, pick);
-        dp[idx][sum] = ans;
+        dp[n] = ans;
         return ans;
     }
     public int numSquares(int n) {
-        int max = (int)Math.sqrt(n);
-        dp = new int[max + 1][n + 1];
-        Arrays.stream(dp).forEach(row -> Arrays.fill(row, -1));
-        if(n <= 3) return n;
-        int ans = sqr(1, 0, n);
-        return ans;
+        int[] dp = new int[n + 1];
+        Arrays.fill(dp, -1);
+        return sqr(n, dp);
     }
 }
