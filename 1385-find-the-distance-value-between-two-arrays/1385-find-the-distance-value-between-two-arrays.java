@@ -1,19 +1,25 @@
 class Solution {
     public int findTheDistanceValue(int[] arr1, int[] arr2, int d) {
-        Arrays.sort(arr1);
         Arrays.sort(arr2);
-        int i = 0;
-        int j = 0;
-        int cnt = 0;
-        while (i < arr1.length) {
-            while (j < arr2.length && arr2[j] < arr1[i] - d) {
-                j++;
+        int count = 0;
+        for (int x : arr1) {
+            int low = 0, high = arr2.length - 1;
+            boolean valid = true;
+            while (low <= high) {
+                int mid = low + (high - low) / 2;
+                if (Math.abs((long) x - arr2[mid]) <= d) {
+                    valid = false;
+                    break;
+                }
+                else if (arr2[mid] < x) {
+                    low = mid + 1;
+                }
+                else {
+                    high = mid - 1;
+                }
             }
-            if (j == arr2.length || arr2[j] > arr1[i] + d) {
-                cnt++;
-            }
-            i++;
+            if (valid) count++;
         }
-        return cnt;
+        return count;
     }
 }
