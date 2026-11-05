@@ -7,7 +7,7 @@ class Solution {
             boolean valid = true;
             while (low <= high) {
                 int mid = low + (high - low) / 2;
-                if (Math.abs((long) x - arr2[mid]) <= d) {
+                if (Math.abs(x - arr2[mid]) <= d) {
                     valid = false;
                     break;
                 }
