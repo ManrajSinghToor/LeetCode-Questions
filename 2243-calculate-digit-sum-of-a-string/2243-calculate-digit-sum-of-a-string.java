@@ -4,7 +4,10 @@ class Solution {
             StringBuilder res = new StringBuilder();
             for(int i = 0; i < s.length(); i += k) {
                 int sum = 0;
-                for(int j = i; j < i + k && j < s.length(); j++) {
+                int len = 0;
+                if(i + k < s.length()) len = i + k;
+                else len = s.length();
+                for(int j = i; j < len; j++) {
                     sum += s.charAt(j) - '0';
                 }
                 res.append(sum);
