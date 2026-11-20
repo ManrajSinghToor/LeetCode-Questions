@@ -1,40 +1,25 @@
 class Solution {
-    public List<TreeNode> delNodes(TreeNode root, int[] to_delete) {
-        List<TreeNode> list = new ArrayList<>();
-        if(root == null) return list;
+    List<TreeNode> list = new ArrayList<>();
+    Set<Integer> set = new HashSet<>();
+    public TreeNode dfs(TreeNode root, boolean isRoot) {
+        if(root == null) return null;
 
-        Set<Integer> set = new HashSet<>();
+        boolean deleted = set.contains(root.val);
+        if(isRoot && !deleted) {
+            list.add(root);
+        }
+        root.left = dfs(root.left, deleted);
+        root.right = dfs(root.right, deleted);
+        if(deleted) return null;
+
+        return root;
+    }
+    public List<TreeNode> delNodes(TreeNode root, int[] to_delete) {
         for(int i = 0; i < to_delete.length; i++) {
             set.add(to_delete[i]);
         }
 
-        Queue<TreeNode> q = new LinkedList<>();
-        q.add(root);
-        if(!set.contains(root.val)) {
-            list.add(root);
-        }
-
-        while(!q.isEmpty()) {
-            TreeNode curr = q.remove();
-            if(curr.left != null) {
-                q.add(curr.left);
-                if(set.contains(curr.left.val)) {
-                    curr.left = null;
-                } 
-                else if(set.contains(curr.val)){
-                    list.add(curr.left);
-                }
-            }
-            if(curr.right != null) {
-                q.add(curr.right);
-                if(set.contains(curr.right.val)) {
-                    curr.right = null;
-                } 
-                else if(set.contains(curr.val)){
-                    list.add(curr.right);
-                }
-            }
-        }
+        dfs(root, true);
         return list; 
     }
 }
